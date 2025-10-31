@@ -1,0 +1,66 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# Virtual environments
+.venv
+venv/
+env/
+ENV/
+
+# Environment variables and secrets
+.env
+.env.local
+*.env
+
+# Airflow
+logs/
+airflow.db
+airflow.cfg.lock
+airflow-webserver.pid
+standalone_admin_password.txt
+webserver_config.py
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+postgres-db-volume/
+
+# IDE and editors
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Generated/test data
+articles_data.json
+usuarios.json
+*.csv
+*.json.bak
+
+# Docker
+docker-compose.override.yml
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Pytest
+.pytest_cache/
+.coverage
+htmlcov/
+
+# MyPy
+.mypy_cache/
+.dmypy.json
+
+# UV lock file (optional, depends on team preference)
+# uv.lock
+

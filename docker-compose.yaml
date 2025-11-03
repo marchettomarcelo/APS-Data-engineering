@@ -79,10 +79,11 @@ x-airflow-common: &airflow-common
         POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-airflow}
         POSTGRES_PORT: ${POSTGRES_PORT:-5432}
     volumes:
-        - ${AIRFLOW_PROJ_DIR:-.}/dags:/opt/airflow/dags
-        - ${AIRFLOW_PROJ_DIR:-.}/logs:/opt/airflow/logs
-        - ${AIRFLOW_PROJ_DIR:-.}/config:/opt/airflow/config
-        - ${AIRFLOW_PROJ_DIR:-.}/plugins:/opt/airflow/plugins
+        - ${AIRFLOW_PROJ_DIR:-.}/apps/airflow/dags:/opt/airflow/dags
+        - ${AIRFLOW_PROJ_DIR:-.}/apps/airflow/sql:/opt/airflow/dags/sql
+        - ${AIRFLOW_PROJ_DIR:-.}/apps/airflow/logs:/opt/airflow/logs
+        - ${AIRFLOW_PROJ_DIR:-.}/apps/airflow/config:/opt/airflow/config
+        - ${AIRFLOW_PROJ_DIR:-.}/apps/airflow/plugins:/opt/airflow/plugins
     user: "${AIRFLOW_UID:-50000}:0"
     depends_on: &airflow-common-depends-on
         redis:

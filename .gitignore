@@ -19,6 +19,7 @@ ENV/
 
 # Airflow
 logs/
+apps/airflow/logs/
 airflow.db
 airflow.cfg.lock
 airflow-webserver.pid

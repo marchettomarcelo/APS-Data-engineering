@@ -337,5 +337,36 @@ services:
             airflow-init:
                 condition: service_completed_successfully
 
+    fastapi:
+        build:
+            context: ./apps/api
+        command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+        ports:
+            - "8000:8000"
+        environment:
+            POSTGRES_HOST: ${POSTGRES_HOST:-postgres}
+            POSTGRES_DB: ${POSTGRES_DB:-airflow}
+            POSTGRES_USER: ${POSTGRES_USER:-airflow}
+            POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-airflow}
+            POSTGRES_PORT: ${POSTGRES_PORT:-5432}
+        volumes:
+            - ${AIRFLOW_PROJ_DIR:-.}/apps/api:/app
+        depends_on:
+            postgres:
+                condition: service_healthy
+
+    frontend:
+        build:
+            context: ./apps/frontend
+        ports:
+            - "5173:5173"
+        environment:
+            VITE_API_BASE_URL: http://localhost:8000
+        volumes:
+            - ${AIRFLOW_PROJ_DIR:-.}/apps/frontend:/apps/frontend
+            - /apps/frontend/node_modules
+        depends_on:
+            - fastapi
+
 volumes:
     postgres-db-volume:

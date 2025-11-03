@@ -32,10 +32,10 @@ Pipeline automatizado de agregação de notícias usando Apache Airflow. Faz scr
     docker-compose up -d
     ```
 
-4. **Acesse o Airflow**
-    - URL: http://localhost:8080
-    - Usuário: `airflow`
-    - Senha: `airflow`
+4. **Acesse as interfaces**
+    - **Airflow UI**: http://localhost:8080 (usuário: `airflow`, senha: `airflow`)
+    - **Frontend**: http://localhost:5173 (visualização de destinatários)
+    - **API**: http://localhost:8000 (FastAPI docs em `/docs`)
 
 ## 📊 Pipeline
 
@@ -50,15 +50,16 @@ O DAG `news_pipeline_dag` executa diariamente às 8h (UTC) e realiza:
 
 ```
 .
-├── dags/                      # DAGs do Airflow
-│   ├── news_pipeline_dag.py   # DAG principal
-│   ├── utils/                 # Utilitários
-│   │   ├── scraper.py         # Scraper de notícias
-│   │   ├── llm_utils.py       # Integração OpenAI
-│   │   ├── email_utils.py     # Envio de emails
-│   │   └── db_utils.py        # Operações de banco
-│   └── sql/
-│       └── init_db.py         # Inicialização do BD
+├── apps/
+│   ├── airflow/               # Apache Airflow
+│   │   ├── dags/              # DAGs
+│   │   │   ├── news_pipeline_dag.py
+│   │   │   └── utils/         # Utilitários (scraper, LLM, email, DB)
+│   │   └── sql/               # Scripts SQL
+│   ├── api/                   # FastAPI Backend
+│   │   └── app/               # Código da API
+│   └── frontend/              # React + Vite Frontend
+│       └── src/               # Código React
 ├── docker-compose.yaml        # Configuração Docker
 └── .env                       # Variáveis de ambiente
 ```
@@ -69,8 +70,22 @@ O DAG `news_pipeline_dag` executa diariamente às 8h (UTC) e realiza:
 docker-compose down
 ```
 
+## 🎨 Interface Web
+
+O frontend React permite:
+- Visualizar lista de destinatários de email
+- Remover destinatários
+- Atualizar lista em tempo real
+
+## 🔌 API Endpoints
+
+- `GET /recipients` - Lista todos os destinatários
+- `POST /recipients` - Adiciona novo destinatário
+- `DELETE /recipients/by-email/{email}` - Remove destinatário
+
 ## 📝 Notas
 
 -   O pipeline coleta até 5 artigos de cada fonte
 -   Destinatários são gerenciados no banco de dados PostgreSQL
 -   Logs disponíveis no diretório `logs/`
+-   Frontend usa Shadcn UI para componentes modernos

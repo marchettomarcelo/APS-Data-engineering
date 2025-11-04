@@ -142,3 +142,8 @@ Documentação interativa disponível em: http://localhost:8000/docs
 -   Destinatários são gerenciados no banco de dados PostgreSQL
 -   Logs disponíveis no diretório `logs/`
 -   Frontend usa Shadcn UI para componentes modernos
+
+# Vídeo de demonstração
+
+
+[Vídeo de demonstração](https://youtu.be/78Cj1DWUDUA)

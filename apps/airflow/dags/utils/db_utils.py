@@ -43,6 +43,7 @@ class DatabaseManager:
             
             if fetch:
                 result = cursor.fetchall()
+                conn.commit()  # Commit even when fetching (e.g., for RETURNING clauses)
                 return [dict(row) for row in result]
             else:
                 conn.commit()

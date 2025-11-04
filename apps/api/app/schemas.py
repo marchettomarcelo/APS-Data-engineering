@@ -19,6 +19,11 @@ class RecipientRead(RecipientBase):
         from_attributes = True
 
 
+class RecipientUpdate(BaseModel):
+    name: str | None = None
+    email: EmailStr | None = None
+
+
 class ArticleBase(BaseModel):
     url: str
     title: str | None = None
@@ -36,6 +41,12 @@ class ArticleRead(ArticleBase):
         from_attributes = True
 
 
+class ArticleUpdate(BaseModel):
+    url: str | None = None
+    title: str | None = None
+    content: str | None = None
+
+
 class EmailContentBase(BaseModel):
     subject: str | None = None
     content: str | None = None
@@ -51,4 +62,9 @@ class EmailContentRead(EmailContentBase):
 
     class Config:
         from_attributes = True
+
+
+class EmailContentUpdate(BaseModel):
+    subject: str | None = None
+    content: str | None = None
 
